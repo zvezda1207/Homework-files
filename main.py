@@ -40,6 +40,31 @@ for dish, ingredients in cook_book.items():
     print(f'{dish}: {ingredients}')
 
 
+def get_shop_list_by_dishes(dishes, person_count):
+    shop_list = {}
+
+    for dish in dishes:
+        if dish in cook_book:
+            for ingredient in cook_book[dish]:
+                ingredient_name = ingredient['ingredient_name']
+                measure = ingredient['measure']
+                quantity = ingredient['quantity'] * person_count
+
+                if ingredient_name in shop_list:
+                    shop_list[ingredient_name]['quantity'] += quantity
+                else:
+                    shop_list[ingredient_name] = {'measure': measure, 'quantity': quantity}
+
+    return shop_list
+
+result = get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+
+for ingredient, details in result.items():
+    print(f'{ingredient}: {details}')
+
+
+
+
 
 
 
